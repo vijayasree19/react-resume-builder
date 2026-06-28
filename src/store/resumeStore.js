@@ -29,6 +29,7 @@ const useResumeStore = create((set) => ({
     email: "vijaya@gmail.com",
     phone: "+91 9876543210",
     github: "github.com/vijayasree19",
+    linkedin: "linkedin.com/in/vijayasree",
     location: "Hyderabad, India",
     photo: "",
   },

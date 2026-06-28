@@ -2,30 +2,31 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
 export async function downloadResumePDF() {
+
   const resume = document.getElementById("resume");
 
-  if (!resume) {
-    alert("Resume element not found.");
-    return;
-  }
+  if (!resume) return;
 
-  // Hide edit controls
+  // Hide + buttons
   const hiddenElements = document.querySelectorAll(".hide-download");
 
-  hiddenElements.forEach((element) => {
-    element.style.display = "none";
+  hiddenElements.forEach(el => {
+    el.style.display = "none";
+  });
+
+  // ⭐ Disable editing before taking screenshot
+  const editableElements = document.querySelectorAll('[contenteditable="true"]');
+
+  editableElements.forEach(el => {
+    el.contentEditable = "false";
   });
 
   try {
+
     const canvas = await html2canvas(resume, {
       scale: 2,
       useCORS: true,
-      backgroundColor: "#ffffff",
-      logging: false,
-      scrollX: 0,
-      scrollY: -window.scrollY,
-      windowWidth: document.documentElement.scrollWidth,
-      windowHeight: document.documentElement.scrollHeight,
+      backgroundColor: "#fff",
     });
 
     const imgData = canvas.toDataURL("image/png");
@@ -36,64 +37,23 @@ export async function downloadResumePDF() {
       format: "a4",
     });
 
-    const pageWidth = 210;
-    const pageHeight = 297;
+    const width = 210;
+    const height = (canvas.height * width) / canvas.width;
 
-    const imgWidth = pageWidth;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-    // If resume fits on one page
-    if (imgHeight <= pageHeight) {
-      pdf.addImage(
-        imgData,
-        "PNG",
-        0,
-        0,
-        imgWidth,
-        imgHeight
-      );
-    } else {
-      // Multi-page support
-      let heightLeft = imgHeight;
-      let position = 0;
-
-      pdf.addImage(
-        imgData,
-        "PNG",
-        0,
-        position,
-        imgWidth,
-        imgHeight
-      );
-
-      heightLeft -= pageHeight;
-
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight;
-
-        pdf.addPage();
-
-        pdf.addImage(
-          imgData,
-          "PNG",
-          0,
-          position,
-          imgWidth,
-          imgHeight
-        );
-
-        heightLeft -= pageHeight;
-      }
-    }
+    pdf.addImage(imgData, "PNG", 0, 0, width, height);
 
     pdf.save("Resume.pdf");
-  } catch (error) {
-    console.error(error);
-    alert("Failed to generate PDF.");
+
   } finally {
-    // Show controls again
-    hiddenElements.forEach((element) => {
-      element.style.display = "";
+
+    // ⭐ Enable editing again
+    editableElements.forEach(el => {
+      el.contentEditable = "true";
     });
+
+    hiddenElements.forEach(el => {
+      el.style.display = "";
+    });
+
   }
 }

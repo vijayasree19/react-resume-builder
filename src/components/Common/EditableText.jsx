@@ -5,6 +5,8 @@ export default function EditableText({
   onChange,
   className = "",
   placeholder = "Click to edit",
+  multiline = false,
+  style = {},
 }) {
   const ref = useRef(null);
 
@@ -21,6 +23,17 @@ export default function EditableText({
       suppressContentEditableWarning
       spellCheck={false}
       onBlur={(e) => onChange(e.target.innerText)}
+      onKeyDown={(e) => {
+        if (!multiline && e.key === "Enter") {
+          e.preventDefault();
+          e.currentTarget.blur();
+        }
+      }}
+      style={{
+        ...style,
+        whiteSpace: multiline ? "pre-wrap" : "normal",
+        wordBreak: "break-word",
+      }}
       className={`outline-none rounded px-1 hover:bg-blue-50 transition ${className}`}
     >
       {value || placeholder}

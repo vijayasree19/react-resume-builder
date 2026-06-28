@@ -1,109 +1,116 @@
 import {
-    FaEnvelope,
-    FaPhone,
-    FaGithub,
-    FaMapMarkerAlt
+  FaEnvelope,
+  FaPhone,
+  FaGithub,
+  FaMapMarkerAlt,
+  FaLinkedin,
 } from "react-icons/fa";
 
+import useResumeStore from "../../store/resumeStore";
 import EditableText from "../Common/EditableText";
 import ProfilePhoto from "./ProfilePhoto";
 
-import useResumeStore from "../../store/resumeStore";
-
 export default function Header() {
+  const { personal, updatePersonal, theme } = useResumeStore();
 
-    const { personal, updatePersonal } = useResumeStore();
+  return (
+    <header className="border-b border-gray-300 pb-5">
 
-    return (
+      <div className="grid grid-cols-[1.6fr_160px_1fr] gap-6 items-start">
 
-        <div className="flex justify-between items-start border-b border-gray-300 pb-8">
+        {/* LEFT */}
 
-            {/* Left */}
+        <div>
 
-            <div className="flex-1 pr-10">
+          <EditableText
+            value={personal.name}
+            onChange={(v) => updatePersonal("name", v)}
+            className="text-[44px] font-bold leading-tight text-gray-900"
+          />
 
-                <EditableText
-                    value={personal.name}
-                    onChange={(v) => updatePersonal("name", v)}
-                    className="text-5xl font-bold text-gray-800"
-                />
+          <EditableText
+            value={personal.title}
+            onChange={(v) => updatePersonal("title", v)}
+            className="text-[22px] font-semibold mt-2"
+            style={{ color: theme.primary }}
+          />
 
-                <EditableText
-                    value={personal.title}
-                    onChange={(v) => updatePersonal("title", v)}
-                    className="text-xl text-blue-600 mt-2 font-medium"
-                />
-
-                <EditableText
-                    value={personal.summary}
-                    onChange={(v) => updatePersonal("summary", v)}
-                    className="mt-5 text-sm leading-6 text-gray-600"
-                />
-
-            </div>
-
-            {/* Right */}
-
-            <div className="w-56 flex flex-col items-center">
-
-                <ProfilePhoto />
-
-                <div className="mt-5 w-full space-y-3 text-sm">
-
-                    <div className="flex items-center gap-2">
-
-                        <FaEnvelope className="text-blue-600" />
-
-                        <EditableText
-                            value={personal.email}
-                            onChange={(v) => updatePersonal("email", v)}
-                            className="text-sm"
-                        />
-
-                    </div>
-
-                    <div className="flex items-center gap-2">
-
-                        <FaPhone className="text-blue-600" />
-
-                        <EditableText
-                            value={personal.phone}
-                            onChange={(v) => updatePersonal("phone", v)}
-                            className="text-sm"
-                        />
-
-                    </div>
-
-                    <div className="flex items-center gap-2">
-
-                        <FaGithub className="text-blue-600" />
-
-                        <EditableText
-                            value={personal.github}
-                            onChange={(v) => updatePersonal("github", v)}
-                            className="text-sm"
-                        />
-
-                    </div>
-
-                    <div className="flex items-center gap-2">
-
-                        <FaMapMarkerAlt className="text-blue-600" />
-
-                        <EditableText
-                            value={personal.location}
-                            onChange={(v) => updatePersonal("location", v)}
-                            className="text-sm"
-                        />
-
-                    </div>
-
-                </div>
-
-            </div>
+          <EditableText
+            value={personal.summary}
+            multiline
+            onChange={(v) => updatePersonal("summary", v)}
+            className="text-[15px] text-gray-700 mt-4 leading-7"
+          />
 
         </div>
 
-    );
+        {/* PHOTO */}
 
+        <div className="flex justify-center">
+
+          <ProfilePhoto />
+
+        </div>
+
+        {/* CONTACT */}
+
+        <div className="pt-2 space-y-4">
+
+          <ContactRow
+            icon={<FaEnvelope />}
+            value={personal.email}
+            field="email"
+          />
+
+          <ContactRow
+            icon={<FaPhone />}
+            value={personal.phone}
+            field="phone"
+          />
+
+          <ContactRow
+            icon={<FaGithub />}
+            value={personal.github}
+            field="github"
+          />
+
+          <ContactRow
+            icon={<FaLinkedin />}
+            value={personal.linkedin || "linkedin.com/in/vijayasree"}
+            field="linkedin"
+          />
+
+          <ContactRow
+            icon={<FaMapMarkerAlt />}
+            value={personal.location}
+            field="location"
+          />
+
+        </div>
+
+      </div>
+
+    </header>
+  );
+
+  function ContactRow({ icon, value, field }) {
+    return (
+      <div className="flex items-center gap-3">
+
+        <span
+          style={{ color: theme.primary }}
+          className="text-lg shrink-0"
+        >
+          {icon}
+        </span>
+
+        <EditableText
+          value={value}
+          onChange={(v) => updatePersonal(field, v)}
+          className="text-[14px] text-gray-700"
+        />
+
+      </div>
+    );
+  }
 }
