@@ -1,6 +1,26 @@
 import { create } from "zustand";
 
 const useResumeStore = create((set) => ({
+
+  // ==========================
+  // Theme
+  // ==========================
+
+  theme: {
+    primary: "#2563eb", // Default Blue
+  },
+
+  setTheme: (color) =>
+    set({
+      theme: {
+        primary: color,
+      },
+    }),
+
+  // ==========================
+  // Personal Details
+  // ==========================
+
   personal: {
     name: "Vijaya Sree",
     title: "Senior Software Engineer",
@@ -20,6 +40,7 @@ const useResumeStore = create((set) => ({
         [field]: value,
       },
     })),
+
 }));
 
 export default useResumeStore;

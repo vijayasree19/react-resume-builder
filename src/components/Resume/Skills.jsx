@@ -3,42 +3,58 @@ import { FaPlus } from "react-icons/fa";
 import SkillChip from "./SkillChip";
 
 export default function Skills() {
-
   const [skills, setSkills] = useState([
     "Java",
     "Spring Boot",
     "AWS",
     "Docker",
+    "Kafka",
+    "PySpark",
+    "Terraform",
+    "Airflow",
   ]);
 
-  function addSkill() {
+  const addSkill = () => {
     setSkills([...skills, "New Skill"]);
-  }
+  };
 
-  function removeSkill(index) {
+  const removeSkill = (index) => {
     setSkills(skills.filter((_, i) => i !== index));
-  }
+  };
 
-  function updateSkill(index, value) {
+  const updateSkill = (index, value) => {
     const updated = [...skills];
     updated[index] = value;
     setSkills(updated);
-  }
+  };
 
   return (
     <section className="mb-8">
 
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex items-center justify-between mb-4">
 
-        <h2 className="text-[16px] font-bold">
+        <h2 className="text-xl font-bold tracking-wide text-gray-900">
           SKILLS
         </h2>
 
         <button
           onClick={addSkill}
-          className="hide-download w-6 h-6 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center"
+          className="
+            hide-download
+            w-7
+            h-7
+            rounded-full
+            bg-blue-600
+            hover:bg-blue-700
+            text-white
+            flex
+            items-center
+            justify-center
+            transition
+            shadow-sm
+        "
         >
-          <FaPlus size={10} />
+          <FaPlus size={11} />
         </button>
 
       </div>

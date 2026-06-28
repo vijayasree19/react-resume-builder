@@ -1,4 +1,5 @@
 import { FaTimes } from "react-icons/fa";
+import EditableText from "../Common/EditableText";
 
 export default function SkillChip({
   skill,
@@ -7,21 +8,48 @@ export default function SkillChip({
   removeSkill,
 }) {
   return (
-    <div className="group relative inline-flex items-center">
+    <div
+      className="
+       group
+       relative
+       flex
+       items-center
+       justify-center
+       min-w-[90px]
+       px-3
+       py-1.5
+       rounded-lg
+       bg-blue-50
+       border
+       border-blue-100
+       hover:border-blue-300
+       transition-all
+      "
+    >
 
-      <div
-        contentEditable
-        suppressContentEditableWarning
-        onBlur={(e) => updateSkill(index, e.target.innerText)}
-        className="bg-blue-50 border border-blue-200 rounded-full px-3 py-1 text-[12px] text-gray-700 outline-none hover:bg-blue-100 transition"
-      >
-        {skill}
-      </div>
+      <EditableText
+        value={skill}
+        onChange={(value) => updateSkill(index, value)}
+        className="text-sm font-medium text-blue-700"
+      />
 
       <button
         onClick={() => removeSkill(index)}
-        className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-red-500 text-white text-[8px]
-        opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+        className="
+          hide-download
+          absolute
+          -top-2
+          -right-2
+          hidden
+          group-hover:flex
+          w-4
+          h-4
+          rounded-full
+          bg-red-500
+          text-white
+          items-center
+          justify-center
+        "
       >
         <FaTimes size={8} />
       </button>

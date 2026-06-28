@@ -52,7 +52,7 @@ export default function Experience() {
 
       <div className="flex justify-between items-center mb-5">
 
-        <h2 className="text-[18px] font-bold tracking-wide border-b pb-2 flex-1">
+        <h2 className="text-xl font-bold tracking-wide text-gray-900">
           WORK EXPERIENCE
         </h2>
 
