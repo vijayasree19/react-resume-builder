@@ -1,16 +1,30 @@
 import Navbar from "../components/Navbar/Navbar";
-import Sidebar from "../components/Sidebar/Sidebar";
 import Resume from "../components/Resume/Resume";
 
-export default function Builder() {
+// export default function Builder() {
+//   return (
+//     <div className="min-h-screen bg-slate-100">
+//       <Navbar />
+//
+//       <div className="flex">
+//         <Sidebar />
+//         <Resume />
+//       </div>
+//     </div>
+//   );
+// }
+export default function App() {
   return (
     <div className="min-h-screen bg-slate-100">
+
       <Navbar />
 
-      <div className="flex">
-        <Sidebar />
+      <main className="flex justify-center py-8 px-4">
+
         <Resume />
-      </div>
+
+      </main>
+
     </div>
   );
 }
