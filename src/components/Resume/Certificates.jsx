@@ -38,7 +38,7 @@ export default function Certificates() {
 
       <div className="flex justify-between items-center mb-4">
 
-        <h2 className="font-bold text-[16px]">
+        <h2 className="text-xl font-bold tracking-wide text-gray-900">
           CERTIFICATES
         </h2>
 

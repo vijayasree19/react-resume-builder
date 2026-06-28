@@ -3,68 +3,77 @@ import useResumeStore from "../../store/resumeStore";
 
 export default function ProfilePhoto() {
 
-    const fileInput = useRef();
+  const fileInput = useRef();
 
-    const { personal, updatePersonal } = useResumeStore();
+  const { personal, updatePersonal, theme } = useResumeStore();
 
-    function choosePhoto() {
-        fileInput.current.click();
-    }
+  function choosePhoto() {
+    fileInput.current.click();
+  }
 
-    function uploadPhoto(e) {
+  function uploadPhoto(e) {
 
-        const file = e.target.files[0];
+    const file = e.target.files[0];
 
-        if (!file) return;
+    if (!file) return;
 
-        const reader = new FileReader();
+    const reader = new FileReader();
 
-        reader.onload = (event) => {
+    reader.onload = (event) => {
 
-            updatePersonal("photo", event.target.result);
+      updatePersonal("photo", event.target.result);
 
-        };
+    };
 
-        reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
 
-    }
+  }
 
-    return (
+  return (
 
-        <>
-            <div
-                onClick={choosePhoto}
-                className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-500 cursor-pointer hover:scale-105 transition shadow-md"
-            >
+    <>
 
-                {personal.photo ? (
+      <div
 
-                    <img
-                        src={personal.photo}
-                        alt="Profile"
-                        className="w-full h-full object-cover"
-                    />
+        onClick={choosePhoto}
 
-                ) : (
+        className="w-32 h-32 rounded-full overflow-hidden cursor-pointer shadow-lg"
 
-                    <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 text-sm text-center px-2">
+        style={{
+          border: `4px solid ${theme.primary}`,
+        }}
 
-                        Click to Upload
+      >
 
-                    </div>
+        {personal.photo ? (
 
-                )}
+          <img
+            src={personal.photo}
+            className="w-full h-full object-cover"
+          />
 
-            </div>
+        ) : (
 
-            <input
-                ref={fileInput}
-                hidden
-                type="file"
-                accept="image/*"
-                onChange={uploadPhoto}
-            />
-        </>
+          <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400 text-sm">
 
-    );
+            Upload
+
+          </div>
+
+        )}
+
+      </div>
+
+      <input
+        hidden
+        ref={fileInput}
+        type="file"
+        accept="image/*"
+        onChange={uploadPhoto}
+      />
+
+    </>
+
+  );
+
 }
