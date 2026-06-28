@@ -18,6 +18,12 @@ const useResumeStore = create((set) => ({
         primary: color,
       },
     }),
+    layout: "two",
+
+    setLayout: (layout) =>
+        set({
+            layout,
+        }),
 
   // ==========================
   // Personal Details
