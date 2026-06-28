@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function EditableText({
   value,
@@ -6,28 +6,24 @@ export default function EditableText({
   className = "",
   placeholder = "Click to edit",
 }) {
-  const [text, setText] = useState(value);
+  const ref = useRef(null);
 
   useEffect(() => {
-    setText(value);
+    if (ref.current && ref.current.innerText !== value) {
+      ref.current.innerText = value;
+    }
   }, [value]);
-
-  function handleBlur(e) {
-    const newValue = e.target.innerText.trim();
-
-    setText(newValue);
-
-    onChange(newValue);
-  }
 
   return (
     <div
+      ref={ref}
       contentEditable
       suppressContentEditableWarning
-      onBlur={handleBlur}
-      className={`outline-none rounded px-1 hover:bg-blue-50 focus:bg-white focus:ring-2 focus:ring-blue-500 transition ${className}`}
+      spellCheck={false}
+      onBlur={(e) => onChange(e.target.innerText)}
+      className={`outline-none rounded px-1 hover:bg-blue-50 transition ${className}`}
     >
-      {text || placeholder}
+      {value || placeholder}
     </div>
   );
 }

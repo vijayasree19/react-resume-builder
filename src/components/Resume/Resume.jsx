@@ -8,7 +8,7 @@ import Achievements from "./Achievements";
 export default function Resume() {
   return (
     <div className="flex-1 flex justify-center p-8 overflow-auto">
-      <div className="bg-white w-[794px] min-h-[1123px] shadow-xl rounded-xl p-10">
+      <div   id="resume" className="bg-white w-[794px] min-h-[1123px] shadow-xl rounded-xl p-10">
 
         {/* Header */}
         <Header />

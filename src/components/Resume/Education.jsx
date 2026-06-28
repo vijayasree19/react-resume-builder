@@ -44,7 +44,7 @@ export default function Education() {
 
         <button
           onClick={addEducation}
-          className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
+          className="hide-download bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
         >
           <FaPlus size={10} />
         </button>

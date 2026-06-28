@@ -36,7 +36,7 @@ export default function Skills() {
 
         <button
           onClick={addSkill}
-          className="w-6 h-6 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center"
+          className="hide-download w-6 h-6 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center"
         >
           <FaPlus size={10} />
         </button>

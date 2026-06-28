@@ -1,5 +1,5 @@
 import { FaDownload } from "react-icons/fa";
-
+import { downloadResumePDF } from "../../utils/downloadPdf";
 export default function Navbar() {
   return (
     <nav className="h-16 bg-white shadow-sm border-b flex items-center justify-between px-8">
@@ -22,7 +22,9 @@ export default function Navbar() {
           Themes
         </button>
 
-        <button className="bg-blue-600 text-white px-5 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition">
+        <button
+         onClick={downloadResumePDF}
+        className="bg-blue-600 text-white px-5 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition">
           <FaDownload />
           Download PDF
         </button>

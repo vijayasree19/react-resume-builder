@@ -1,18 +1,11 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
+import useResumeStore from "../../store/resumeStore";
 
 export default function ProfilePhoto() {
 
     const fileInput = useRef();
 
-    const [image, setImage] = useState(
-        localStorage.getItem("profilePhoto") || ""
-    );
-
-    useEffect(() => {
-        if (image) {
-            localStorage.setItem("profilePhoto", image);
-        }
-    }, [image]);
+    const { personal, updatePersonal } = useResumeStore();
 
     function choosePhoto() {
         fileInput.current.click();
@@ -26,9 +19,9 @@ export default function ProfilePhoto() {
 
         const reader = new FileReader();
 
-        reader.onload = function (event) {
+        reader.onload = (event) => {
 
-            setImage(event.target.result);
+            updatePersonal("photo", event.target.result);
 
         };
 
@@ -37,27 +30,32 @@ export default function ProfilePhoto() {
     }
 
     return (
-        <div
-            onClick={choosePhoto}
-            className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-500 cursor-pointer hover:scale-105 transition"
-        >
 
-            {image ? (
+        <>
+            <div
+                onClick={choosePhoto}
+                className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-500 cursor-pointer hover:scale-105 transition shadow-md"
+            >
 
-                <img
-                    src={image}
-                    className="w-full h-full object-cover"
-                />
+                {personal.photo ? (
 
-            ) : (
+                    <img
+                        src={personal.photo}
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                    />
 
-                <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 text-sm text-center px-2">
+                ) : (
 
-                    Click to Upload
+                    <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 text-sm text-center px-2">
 
-                </div>
+                        Click to Upload
 
-            )}
+                    </div>
+
+                )}
+
+            </div>
 
             <input
                 ref={fileInput}
@@ -66,8 +64,7 @@ export default function ProfilePhoto() {
                 accept="image/*"
                 onChange={uploadPhoto}
             />
+        </>
 
-        </div>
     );
-
 }

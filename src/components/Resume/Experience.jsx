@@ -58,7 +58,7 @@ export default function Experience() {
 
         <button
           onClick={addExperience}
-          className="ml-3 w-7 h-7 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center transition"
+          className="hide-download ml-3 w-7 h-7 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center transition"
         >
           <FaPlus size={11} />
         </button>
