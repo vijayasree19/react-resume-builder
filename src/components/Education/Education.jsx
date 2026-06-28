@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import EducationCard from "./EducationCard";
-
+import useResumeStore from "../../store/resumeStore";
 export default function Education() {
-
+const { theme } = useResumeStore();
   const [education, setEducation] = useState([
     {
       degree: "B.Tech - Information Technology",
@@ -45,6 +45,9 @@ export default function Education() {
         <button
           onClick={addEducation}
           className="hide-download bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
+           style={{
+                      backgroundColor: theme.primary,
+                    }}
         >
           <FaPlus size={10} />
         </button>

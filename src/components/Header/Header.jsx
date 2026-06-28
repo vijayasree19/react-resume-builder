@@ -8,7 +8,7 @@ import {
 
 import useResumeStore from "../../store/resumeStore";
 import EditableText from "../Common/EditableText";
-import ProfilePhoto from "./ProfilePhoto";
+import ProfilePhoto from "../Profile/ProfilePhoto";
 
 export default function Header() {
   const { personal, updatePersonal, theme } = useResumeStore();

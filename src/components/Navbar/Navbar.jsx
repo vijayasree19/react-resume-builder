@@ -1,36 +1,76 @@
+import { useState } from "react";
 import { FaDownload } from "react-icons/fa";
-import { downloadResumePDF } from "../../utils/downloadPdf";
-export default function Navbar() {
-  return (
-    <nav className="h-16 bg-white shadow-sm border-b flex items-center justify-between px-8">
 
-      <h1 className="text-2xl font-bold text-blue-700">
+import ThemePicker from "./ThemePicker";
+import useResumeStore from "../../store/resumeStore";
+import { downloadResumePDF } from "../../utils/downloadPdf";
+import TemplatePicker from "./TemplatePicker";
+export default function Navbar() {
+  const [showThemes, setShowThemes] = useState(false);
+const [showTemplates, setShowTemplates] = useState(false);
+  const { layout, setLayout } = useResumeStore();
+
+  return (
+    <nav className="bg-slate-900 text-white px-8 py-4 flex justify-between items-center shadow-md">
+
+      {/* Logo */}
+      <h1 className="text-2xl font-bold">
         Resume Builder
       </h1>
 
-      <div className="flex gap-4">
+      {/* Right Controls */}
+      <div className="flex items-center gap-4 relative">
 
-        <button className="px-4 py-2 rounded-lg hover:bg-gray-100">
-          Layout
+        {/* Layout */}
+        <button
+            onClick={() => setShowTemplates(!showTemplates)}
+            className="px-4 py-2 rounded-lg border border-slate-600 hover:bg-slate-700 transition"
+        >
+
+            Templates
+
         </button>
 
-        <button className="px-4 py-2 rounded-lg hover:bg-gray-100">
+        {showTemplates && (
+
+            <TemplatePicker
+                onClose={() => setShowTemplates(false)}
+            />
+
+        )}
+
+        {/* Fonts */}
+        <button className="px-4 py-2 rounded-lg border border-slate-600 hover:bg-slate-700 transition">
           Fonts
         </button>
 
-        <button className="px-4 py-2 rounded-lg hover:bg-gray-100">
+        {/* Themes */}
+        <button
+          onClick={() => setShowThemes((prev) => !prev)}
+          className="px-4 py-2 rounded-lg border border-slate-600 hover:bg-slate-700 transition"
+        >
           Themes
         </button>
 
+        {showThemes && (
+          <ThemePicker
+            onClose={() => setShowThemes(false)}
+          />
+        )}
+
+        {/* Download */}
         <button
-         onClick={downloadResumePDF}
-        className="bg-blue-600 text-white px-5 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition">
+          onClick={downloadResumePDF}
+          className="flex items-center gap-2 px-5 py-2 rounded-lg text-white transition"
+          style={{
+            backgroundColor: "#2563eb",
+          }}
+        >
           <FaDownload />
           Download PDF
         </button>
 
       </div>
-
     </nav>
   );
 }

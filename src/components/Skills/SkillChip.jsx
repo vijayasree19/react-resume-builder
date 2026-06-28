@@ -1,5 +1,6 @@
 import { FaTimes } from "react-icons/fa";
 import EditableText from "../Common/EditableText";
+import useResumeStore from "../../store/resumeStore";
 
 export default function SkillChip({
   skill,
@@ -7,30 +8,39 @@ export default function SkillChip({
   updateSkill,
   removeSkill,
 }) {
+
+  const { theme } = useResumeStore();
+
   return (
+
     <div
       className="
-       group
-       relative
-       flex
-       items-center
-       justify-center
-       min-w-[90px]
-       px-3
-       py-1.5
-       rounded-lg
-       bg-blue-50
-       border
-       border-blue-100
-       hover:border-blue-300
-       transition-all
+        group
+        relative
+        flex
+        items-center
+        justify-center
+        min-w-[90px]
+        px-3
+        py-1.5
+        rounded-lg
+        border
+        transition-all
       "
+      style={{
+        backgroundColor: `${theme.primary}15`,
+        borderColor: `${theme.primary}30`,
+      }}
     >
 
       <EditableText
         value={skill}
         onChange={(value) => updateSkill(index, value)}
-        className="text-sm font-medium text-blue-700"
+        align="center"
+        className="text-sm font-medium"
+        style={{
+          color: theme.primary,
+        }}
       />
 
       <button
@@ -55,5 +65,6 @@ export default function SkillChip({
       </button>
 
     </div>
+
   );
 }

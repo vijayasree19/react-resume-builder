@@ -2,7 +2,9 @@ import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import SkillChip from "./SkillChip";
 
+import useResumeStore from "../../store/resumeStore";
 export default function Skills() {
+  const { theme } = useResumeStore();
   const [skills, setSkills] = useState([
     "Java",
     "Spring Boot",
@@ -53,6 +55,9 @@ export default function Skills() {
             transition
             shadow-sm
         "
+        style={{
+                   backgroundColor: theme.primary,
+                 }}
         >
           <FaPlus size={11} />
         </button>
