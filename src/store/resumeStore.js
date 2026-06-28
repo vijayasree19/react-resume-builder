@@ -7,12 +7,14 @@ const useResumeStore = create((set) => ({
   // ==========================
 
   theme: {
-    primary: "#2563eb", // Default Blue
+    name: "Ocean Blue",
+    primary: "#2563eb",
   },
 
-  setTheme: (color) =>
+  setTheme: (name, color) =>
     set({
       theme: {
+        name,
         primary: color,
       },
     }),

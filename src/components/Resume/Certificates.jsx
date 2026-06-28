@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import CertificateCard from "./CertificateCard";
-
+import useResumeStore from "../../store/resumeStore";
 export default function Certificates() {
-
+const { theme } = useResumeStore();
   const [certificates, setCertificates] = useState([
     {
       name: "AWS Certified Cloud Practitioner",
@@ -45,6 +45,9 @@ export default function Certificates() {
         <button
           onClick={addCertificate}
           className="hide-download w-6 h-6 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center"
+           style={{
+                                backgroundColor: theme.primary,
+                              }}
         >
           <FaPlus size={10} />
         </button>

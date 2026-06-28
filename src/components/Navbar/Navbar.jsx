@@ -1,36 +1,45 @@
-import { FaDownload } from "react-icons/fa";
-import { downloadResumePDF } from "../../utils/downloadPdf";
-export default function Navbar() {
-  return (
-    <nav className="h-16 bg-white shadow-sm border-b flex items-center justify-between px-8">
+import { useState } from "react";
+import ThemePicker from "./ThemePicker";
 
-      <h1 className="text-2xl font-bold text-blue-700">
+export default function Navbar() {
+
+  const [showThemes, setShowThemes] = useState(false);
+
+  return (
+
+    <nav className="bg-slate-900 text-white px-8 py-4 flex justify-between items-center">
+
+      <h1 className="font-bold text-2xl">
         Resume Builder
       </h1>
 
-      <div className="flex gap-4">
+      <div className="flex gap-4 relative">
 
-        <button className="px-4 py-2 rounded-lg hover:bg-gray-100">
+        <button className="px-5 py-2 rounded-lg border">
           Layout
         </button>
 
-        <button className="px-4 py-2 rounded-lg hover:bg-gray-100">
+        <button className="px-5 py-2 rounded-lg border">
           Fonts
         </button>
 
-        <button className="px-4 py-2 rounded-lg hover:bg-gray-100">
+        <button
+          className="px-5 py-2 rounded-lg border"
+          onClick={() => setShowThemes(!showThemes)}
+        >
           Themes
         </button>
 
-        <button
-         onClick={downloadResumePDF}
-        className="bg-blue-600 text-white px-5 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition">
-          <FaDownload />
-          Download PDF
-        </button>
+        {showThemes && (
+          <ThemePicker
+            onClose={() => setShowThemes(false)}
+          />
+        )}
 
       </div>
 
     </nav>
+
   );
+
 }
