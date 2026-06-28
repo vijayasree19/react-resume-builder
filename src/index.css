@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: #eef2f7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[contenteditable="true"] {
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+[contenteditable="true"]:hover {
+  background: #eff6ff;
+}
+
+[contenteditable="true"]:focus {
+  outline: 2px solid #2563eb;
+  background: white;
+}
